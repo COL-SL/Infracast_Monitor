@@ -11,14 +11,18 @@ SUBJECT_INFRACAST_MONITOR = 'GEM Production Alerts'
 GATEWAY = 'Gateway'
 TOTAL_ROW = 7
 
+
 def get_subject_email(message):
     return message.Subject
+
 
 def get_body_email(message):
     return message.body
 
+
 def get_last_email(message):
     return message.GetLast()
+
 
 def get_number_gateway(message):
     message_aux = get_last_email(message)
@@ -41,6 +45,7 @@ def get_number_gateway(message):
                 FIND_GATEWAY = True
 
     return LIST_NUMBER_GATEWAY
+
 
 '''
 def get_name_country(message):
@@ -96,11 +101,13 @@ def get_country_code(message):
     return LIST_GOUNTRY_CODE
 '''
 
+
 def get_country_code(message):
     message_aux = get_last_email(message)
     message_aux = get_body_email(message_aux)
     pattern_country_code = re.compile('(\( *[0-9]+ *\))')
     return pattern_country_code.findall(str(message_aux))
+
 
 def get_normalize_country_code(list_country_code):
     LIST_NORMALIZE_COUNTRY_CODE = []
@@ -110,6 +117,7 @@ def get_normalize_country_code(list_country_code):
         LIST_NORMALIZE_COUNTRY_CODE.append(country_normalize_country)
     return LIST_NORMALIZE_COUNTRY_CODE
 
+
 def get_name_country(list_country_code):
     LIST_NAME_COUNTRY = []
     for country_code in list_country_code:
@@ -117,6 +125,8 @@ def get_name_country(list_country_code):
             LIST_NAME_COUNTRY.append('Panama')
         elif country_code == '505':
             LIST_NAME_COUNTRY.append('Nicaragua')
+        elif country_code == '506':
+            LIST_NAME_COUNTRY.append('Costa Rica')
         elif country_code == '503':
             LIST_NAME_COUNTRY.append('EL Salvador')
         elif country_code == '90':
@@ -133,9 +143,24 @@ def get_name_country(list_country_code):
             LIST_NAME_COUNTRY.append('Chile')
         elif country_code == '44':
             LIST_NAME_COUNTRY.append('United Kingdom')
+        elif country_code == '1':
+            LIST_NAME_COUNTRY.append('US/Canada/Caribbean')
+        elif country_code == '39':
+            LIST_NAME_COUNTRY.append('Italy')
+        elif country_code == '55':
+            LIST_NAME_COUNTRY.append('Brazil')
+        elif country_code == '48':
+            LIST_NAME_COUNTRY.append('Poland')
+        elif country_code == '54':
+            LIST_NAME_COUNTRY.append('Argentina')
+        elif country_code == '53':
+            LIST_NAME_COUNTRY.append('Cuba')
+        elif country_code == '51':
+            LIST_NAME_COUNTRY.append('Peru')
         else:
             print ("Pais nuevo añadir!!!!")
     return LIST_NAME_COUNTRY
+
 
 def get_high_rate(message):
     message_aux = get_last_email(message)
@@ -143,11 +168,13 @@ def get_high_rate(message):
     pattern_high_rate = re.compile('(high *[a-z]+ *rate)')
     return pattern_high_rate.findall(str(message_aux))
 
+
 def get_percent(message):
     message_aux = get_last_email(message)
     message_aux = get_body_email(message_aux)
     pattern_percent = re.compile('(\( *[0-9]+ *%)')
     return pattern_percent.findall(str(message_aux))
+
 
 def get_normalize_percent(list_percent):
     list_normalize_percent = []
@@ -156,6 +183,7 @@ def get_normalize_percent(list_percent):
         percent_normalize = percent_aux.strip('%')
         list_normalize_percent.append(percent_normalize)
     return list_normalize_percent
+
 
 def get_normalize_percent(list_percent):
     list_normalize_percent = []
@@ -171,6 +199,7 @@ def get_out(message):
     out_percent = re.compile('(\), *[0-9]+ *out)')
     return out_percent.findall(str(message_aux))
 
+
 def get_normalize_out(list_out):
     list_normalize_out = []
     for out in list_out:
@@ -180,11 +209,13 @@ def get_normalize_out(list_out):
         list_normalize_out.append(out_normalize)
     return list_normalize_out
 
+
 def get_messages(message):
     message_aux = get_last_email(message)
     message_aux = get_body_email(message_aux)
     messages_percent = re.compile('(of *[0-9]+ *messages)')
     return messages_percent.findall(str(message_aux))
+
 
 def get_normalize_messages(list_messages):
     list_normalize_messages = []
@@ -195,41 +226,44 @@ def get_normalize_messages(list_messages):
         list_normalize_messages.append(messages_normalize)
     return list_normalize_messages
 
+
 def count_element_list(list):
     count_total = 0
     for element in list:
         count_total = count_total + 1
     return count_total
 
-def concat_list_final(count_element_total, list_number_gateway, list_normalize_country_code, list_name_country, list_high_rate,
-                 list_normalize_percent , list_normalize_out, list_normalize_messages):
+
+def get_time(message, count_element_total):
+    list_time_aux = []
+    message_aux = get_last_email(message)
+    message_aux = str(message_aux.ReceivedTime)
+    for i in range(0, count_element_total):
+        list_time_aux.append(str(message_aux))
+    return list_time_aux
+
+
+def get_once_time(message):
+    date = ''
+    message_aux = get_last_email(message)
+    message_aux = str(message_aux.ReceivedTime)
+    date = str(message_aux)
+    #print (date)
+    return date
+
+
+def concat_list_final(count_element_total, list_time, list_number_gateway, list_normalize_country_code,
+                      list_name_country, list_high_rate,
+                      list_normalize_percent , list_normalize_out, list_normalize_messages):
     list_final= []
-    list_final[0] = 9
-    '''
-    matriz = np.empty((count_element_total,TOTAL_ROW))
-    total_filas = 0
-    total_columnas = 0
 
-    for i in list_number_gateway:
-        print (i)
-        matriz[total_filas][total_columnas] = list_number_gateway[total_filas]
-        total_filas = total_filas + 1
-
-    total_columnas = total_columnas + 1
-    total_filas = 0
-
-    for i in list_number_gateway:
-        print (i)
-        matriz[total_filas][total_columnas] = list_normalize_country_code[total_filas]
-        total_filas = total_filas + 1
-
-    total_columnas = total_columnas + 1
-    total_filas = 0
-
-    for i in list_number_gateway:
-        print (i)
-        matriz[total_filas][total_columnas] = list_name_country[total_filas]
-        total_filas = total_filas + 1
-
-    print (matriz)
-    '''
+    for number in range (0, count_element_total):
+        list_final.append(list_time[number])
+        list_final.append(list_number_gateway[number])
+        list_final.append(list_normalize_country_code[number])
+        list_final.append(list_name_country[number])
+        list_final.append(list_high_rate[number])
+        list_final.append(list_normalize_percent[number])
+        list_final.append(list_normalize_out[number])
+        list_final.append(list_normalize_messages[number])
+    return list_final
