@@ -47,61 +47,6 @@ def get_number_gateway(message):
     return LIST_NUMBER_GATEWAY
 
 
-'''
-def get_name_country(message):
-    message_aux = get_last_email(message)
-    subject = message_aux.Subject
-    body = message_aux.body
-    LIST_NAME_GOUNTRY = []
-    name_country = ''
-    FIND_GATEWAY = False
-    FIND_NAME_GOUNTRY = False
-
-    if subject == SUBJECT_INFRACAST_MONITOR:
-        body = body.split(' ')
-        for word in body:
-            if FIND_GATEWAY == True and FIND_NAME_GOUNTRY == True:
-                name_country = word
-                FIND_GATEWAY = False
-                FIND_NAME_GOUNTRY = False
-                LIST_NAME_GOUNTRY.append(name_country)
-            if FIND_GATEWAY == True:
-                FIND_NAME_GOUNTRY = True
-            if str(word) == GATEWAY:
-                FIND_GATEWAY = True
-
-    return LIST_NAME_GOUNTRY
-
-def get_country_code(message):
-    message_aux = get_last_email(message)
-    subject = message_aux.Subject
-    body = message_aux.body
-    LIST_GOUNTRY_CODE = []
-    country_code = ''
-    FIND_GATEWAY = False
-    FIND_NAME_GOUNTRY = False
-    FIND_GOUNTRY_CODE = False
-
-    if subject == SUBJECT_INFRACAST_MONITOR:
-        body = body.split(' ')
-        for word in body:
-            if FIND_GATEWAY == True and FIND_NAME_GOUNTRY == True and FIND_GOUNTRY_CODE == True:
-                country_code = word
-                FIND_GATEWAY = False
-                FIND_NAME_GOUNTRY = False
-                FIND_GOUNTRY_CODE = False
-                LIST_GOUNTRY_CODE.append(country_code)
-            if FIND_NAME_GOUNTRY == True:
-                FIND_GOUNTRY_CODE = True
-            if FIND_GATEWAY == True:
-                FIND_NAME_GOUNTRY = True
-            if str(word) == GATEWAY:
-                FIND_GATEWAY = True
-
-    return LIST_GOUNTRY_CODE
-'''
-
-
 def get_country_code(message):
     message_aux = get_last_email(message)
     message_aux = get_body_email(message_aux)
@@ -157,6 +102,8 @@ def get_name_country(list_country_code):
             LIST_NAME_COUNTRY.append('Cuba')
         elif country_code == '51':
             LIST_NAME_COUNTRY.append('Peru')
+        elif country_code == '31':
+            LIST_NAME_COUNTRY.append('Netherlands')
         else:
             print ("Pais nuevo añadir!!!!")
     return LIST_NAME_COUNTRY
