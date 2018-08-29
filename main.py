@@ -6,6 +6,7 @@ import time
 from functions import *
 from data_base import *
 import re
+import random
 
 time_check = ""
 outlook = win32com.client.Dispatch("outlook.Application").GetNameSpace("MAPI")
@@ -106,6 +107,7 @@ def init_delay_time():
         else:
             print('\n')
             print("No nos interesa email\n")
+            print(random.randrange(10))
         time.sleep(1)
 
 
