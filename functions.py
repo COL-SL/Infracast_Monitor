@@ -96,6 +96,8 @@ def get_name_country(list_country_code):
             LIST_NAME_COUNTRY.append('Brazil')
         elif country_code == '48':
             LIST_NAME_COUNTRY.append('Poland')
+        elif country_code == '49':
+            LIST_NAME_COUNTRY.append('Germany')
         elif country_code == '54':
             LIST_NAME_COUNTRY.append('Argentina')
         elif country_code == '53':
@@ -104,6 +106,8 @@ def get_name_country(list_country_code):
             LIST_NAME_COUNTRY.append('Peru')
         elif country_code == '31':
             LIST_NAME_COUNTRY.append('Netherlands')
+        elif country_code == '58':
+            LIST_NAME_COUNTRY.append('Venezuela')
         else:
             print ("Pais nuevo añadir!!!!")
     return LIST_NAME_COUNTRY
