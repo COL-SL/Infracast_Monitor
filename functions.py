@@ -112,6 +112,8 @@ def get_name_country(list_country_code):
             LIST_NAME_COUNTRY.append('South Africa')
         elif country_code == '52':
             LIST_NAME_COUNTRY.append('Mexico')
+        elif country_code == '47':
+            LIST_NAME_COUNTRY.append('Norway')
         else:
             print ("Pais nuevo añadir!!!!")
     return LIST_NAME_COUNTRY
